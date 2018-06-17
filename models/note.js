@@ -6,7 +6,7 @@ const Schema = moongose.Schema
 const NotesSchema = Schema ({
     title : String,
     content : String, 
-    favorite : {type:Boolean, default:0}
+    favorite : Boolean,
 })
 
 module.exports = moongose.model('Note' , NotesSchema)

@@ -50,7 +50,8 @@ function getAllFavNotes(req, res) {
 
 function getNoteById(req, res) {
     //Asignacion del parametro que viene en la url 
-    let noteID = req.params.noteID
+    let noteID = req.params.noteId
+    //console.log(noteID)
     //Query a mongoDB
     Note.findById(noteID, (err, note) => {
         //Compruebo si hay algun error en el callback
@@ -59,10 +60,11 @@ function getNoteById(req, res) {
                 message: `Se ha producido un error: ${err}`
             })
 
+        //console.log(note)
         //Comprueba si trae valores
         if (!note) return res.status(404)
             .send({
-                message: 'La consulta no a recuperado ningún valor.'
+                message: 'La consulta no a recuperado ningún valorrrrrrrr.'
             })
 
         //Respuesta con valores
@@ -95,7 +97,7 @@ function createNote(req, res) {
 //--DELETE-- Borra una nota por un ID
 
 function deleteNote(req, res) {
-    let noteID = req.params.noteID
+    let noteID = req.params.noteId
     Note.findById(noteID, (err, note) => {
         //Compruebo si hay algun error en el callback
         if (err) return res.status(500)
@@ -104,22 +106,19 @@ function deleteNote(req, res) {
             })
         //Elimina la nota
         note.remove(err => {
-            if (err) res.status(500)
-                .send({
-                    message: `Error al borrar el producto ${err}`
-                })
-            res.status(200).send({
-                message: 'El contenido se ha borrado correctamente.'
-            })
+            if(err) res.status(500).send({message:`Error al borrar  ${err}`})
+            res.status(200).send({message:'El contenido se ha borrado correctamente.'})
         })
     })
 }
 //--PATCH-- Update de una nota a favorita o la desmarca como fav
 
 function updateNote(req, res) {
-    let noteID = req.params.noteID
+    let noteID = req.params.noteId
+    //console.log(noteID)
     let updateNote = req.body
-    Note.findByIdAndUpdate(noteID,updateNote, (err,noteUpdate) => {
+    //console.log(updateNote)
+    Note.findByIdAndUpdate(noteID, updateNote , (err,noteUpdate) => {
         if(err) res.status(500).send({message: `Ha ocurrido un error ${err}`})
         res.status(200).send({noteUpdate})
     })

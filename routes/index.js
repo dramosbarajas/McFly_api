@@ -6,9 +6,9 @@ const api = express.Router()
 //Rutas para los endpoint
 api.get('/note', NoteController.getAllNotes)
 api.get('/note/:noteId', NoteController.getNoteById)
-api.get('/note', NoteController.getAllFavNotes)
+api.get('/notef', NoteController.getAllFavNotes)
 api.post('/note', NoteController.createNote)
 api.delete('/note/:noteId', NoteController.deleteNote)
-api.patch('/note/:noteId', NoteController.updateNote)
+api.put('/note/:noteId', NoteController.updateNote)
 
 module.exports = api
